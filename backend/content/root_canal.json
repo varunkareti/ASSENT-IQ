@@ -1,0 +1,36 @@
+{
+  "id": "root_canal",
+  "display_name": "Non-Surgical Root Canal Treatment",
+  "diagnosis": "The soft tissue inside your tooth (the pulp or nerve) has become infected or inflamed and will not heal on its own.",
+  "treatment_steps": [
+    "Numb the area completely with local anesthesia",
+    "Isolate the tooth with a small protective sheet called a dental dam",
+    "Create a small access opening through the top of the tooth",
+    "Clean and disinfect the infected canal space using tiny instruments",
+    "Fill and seal the canal with a biocompatible material",
+    "Place a temporary or permanent filling; a crown is usually placed in a later visit"
+  ],
+  "benefits": [
+    "Saves your natural tooth instead of removing it",
+    "Removes infection and relieves pain",
+    "Treated teeth can last a lifetime with proper care and a crown",
+    "Restores normal chewing function"
+  ],
+  "risks": [
+    "Soreness, swelling, or bleeding after the procedure",
+    "Temporary or, rarely, permanent numbness or tingling in the tooth or surrounding tissue",
+    "Allergic reaction to injections or medications",
+    "Instrument separation inside the canal",
+    "Root perforation during treatment",
+    "Treatment failure requiring retreatment, minor surgery, or extraction",
+    "Reduced effectiveness of birth-control pills if certain antibiotics are prescribed",
+    "The tooth may become discolored over time"
+  ],
+  "alternatives": [
+    "Extraction (tooth removal)",
+    "Extraction with replacement options such as an implant, bridge, or partial denture",
+    "No treatment at this time (the infection will not resolve on its own and may worsen)"
+  ],
+  "risks_of_declining": "The infection will not resolve on its own. Left untreated it can lead to more pain, spreading infection to surrounding bone and tissue, and possible loss of the tooth.",
+  "prognosis": "Generally good with high success rates when a crown is placed afterward. No outcome is guaranteed, but most root canals last many years with proper care."
+}

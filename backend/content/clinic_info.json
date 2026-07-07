@@ -1,0 +1,9 @@
+{
+  "clinic_name": "REPLACE_WITH_CLINIC_NAME",
+  "doctor_name": "REPLACE_WITH_DOCTOR_NAME",
+  "phone": "REPLACE_WITH_PHONE",
+  "address": "REPLACE_WITH_ADDRESS",
+  "email": "REPLACE_WITH_EMAIL",
+  "website": "REPLACE_WITH_WEBSITE",
+  "logo_path": "assets/logo/assentiq_logo.png"
+}

@@ -1,0 +1,47 @@
+{
+  "id": "dental_implant",
+  "display_name": "Dental Implant Placement",
+  "diagnosis": "You are missing one or more teeth and a dental implant — a titanium post surgically placed into the jawbone — has been recommended to replace the missing tooth root and restore your smile and chewing function.",
+  "treatment_steps": [
+    "Take a 3D X-ray (CBCT) to evaluate bone quality, quantity, and important anatomical structures",
+    "Review your medical history and medications for any factors that may affect healing",
+    "Numb the area completely with local anesthesia; sedation options may be available",
+    "Make a small incision in the gum to expose the bone where the implant will be placed",
+    "Gradually drill precise osteotomy holes into the jawbone at the exact position and angle",
+    "Screw the titanium implant post into the bone — this acts as the artificial tooth root",
+    "Suture the gum tissue closed over or around the implant",
+    "Allow several months for the bone to fuse with the implant (osseointegration)",
+    "Place an abutment (connector) and take impressions for the final crown",
+    "Attach the custom-made permanent crown, bridge, or denture"
+  ],
+  "benefits": [
+    "Looks and feels like a natural tooth",
+    "Prevents bone loss in the jaw that normally occurs after tooth loss",
+    "Does not require filing down adjacent healthy teeth (unlike a bridge)",
+    "Permanent solution that can last decades with proper care",
+    "Restores natural chewing function and clear speech",
+    "Easy to maintain — brush and floss like normal teeth"
+  ],
+  "risks": [
+    "Bleeding, swelling, bruising, and discomfort for several days after surgery",
+    "Infection at the implant site",
+    "Temporary or, rarely, permanent numbness, tingling, or change in sensation of the lip, chin, cheek, gums, tongue, or throat due to nerve involvement",
+    "Damage to adjacent teeth or blood vessels during surgery",
+    "Implant failure to integrate with the bone, requiring removal and possible repeat surgery",
+    "Loosening or fracture of the implant, abutment, or crown over time",
+    "Sinus complications for implants in the upper back jaw, which may require a sinus lift procedure",
+    "Gum recession around the implant affecting appearance",
+    "Prolonged or incomplete healing, especially in patients who smoke or have uncontrolled diabetes",
+    "Long-term reduced effectiveness of birth-control pills if certain antibiotics are prescribed after surgery",
+    "Patients taking bisphosphonate medications (for osteoporosis) or those who have had radiation therapy to the jaw may have an increased risk of poor healing or bone necrosis",
+    "Additional procedures may be needed during surgery, such as bone grafting or sinus lifts"
+  ],
+  "alternatives": [
+    "Fixed dental bridge (uses adjacent teeth for support)",
+    "Removable partial denture",
+    "No treatment (the gap will remain, which may cause nearby teeth to shift and chewing function to decrease)",
+    "Resin-bonded bridge (Maryland bridge) in select cases"
+  ],
+  "risks_of_declining": "If you choose not to replace the missing tooth, neighboring teeth may gradually tilt and shift into the gap. The opposing tooth may also over-erupt. This can change your bite and lead to jaw problems, difficulty chewing, and increased risk of decay and gum disease. Bone loss at the extraction site will continue over time.",
+  "prognosis": "Dental implants have a high success rate, typically reported above 95 percent for healthy patients. Success depends on good oral hygiene, regular dental visits, avoiding smoking, and following post-operative instructions. No outcome is guaranteed and individual results may vary. Implants can fail years later due to gum disease, overload, or medical factors."
+}

@@ -1,0 +1,31 @@
+# Environment
+backend/.env
+backend/*.db
+
+# Dependencies
+node_modules/
+frontend/node_modules/
+
+# Storage
+backend/storage/audio/*
+!backend/storage/audio/.gitkeep
+backend/storage/signatures/*
+!backend/storage/signatures/.gitkeep
+backend/storage/pdfs/*
+!backend/storage/pdfs/.gitkeep
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build
+frontend/dist/
+
+# Logs
+*.log

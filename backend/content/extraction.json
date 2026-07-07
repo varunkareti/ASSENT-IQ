@@ -1,0 +1,39 @@
+{
+  "id": "extraction",
+  "display_name": "Tooth Extraction (Tooth Removal)",
+  "diagnosis": "Your tooth is severely damaged, decayed, or infected beyond repair and needs to be safely removed to protect your overall oral health.",
+  "treatment_steps": [
+    "Take an X-ray to review the tooth shape, roots, and surrounding bone",
+    "Numb the area completely with local anesthesia",
+    "Gently loosen the tooth from its socket using a special instrument called an elevator",
+    "Remove the tooth using sterile forceps with a smooth, controlled motion",
+    "Clean the socket and remove any debris",
+    "Place sterile gauze over the extraction site and apply gentle pressure to control bleeding",
+    "Provide post-operative care instructions for healing"
+  ],
+  "benefits": [
+    "Removes the source of infection and pain",
+    "Prevents damage to nearby teeth and bone",
+    "Quick procedure with straightforward recovery",
+    "Avoids the need for more extensive surgery later"
+  ],
+  "risks": [
+    "Normal bleeding, swelling, and discomfort for a few days",
+    "Infection at the extraction site",
+    "Temporary or, rarely, permanent numbness or tingling of the lip, chin, cheek, tongue, or gums due to nerve involvement",
+    "Dry socket (loss of the blood clot) causing delayed healing and pain",
+    "Damage to nearby teeth, fillings, or restorations",
+    "Jaw stiffness or soreness for several days",
+    "Sinus communication or opening for upper molars, which may require additional treatment to close",
+    "Need for additional treatment discovered during the procedure that may change the plan",
+    "Bleeding that lasts longer than expected",
+    "Allergic reaction to injections or medications"
+  ],
+  "alternatives": [
+    "No treatment at this time (the decay or infection will continue and may worsen)",
+    "Root canal treatment followed by a crown (if the tooth is salvageable)",
+    "Extraction with replacement options such as an implant, bridge, or partial denture to prevent neighboring teeth from shifting"
+  ],
+  "risks_of_declining": "If left untreated, the infection or decay will continue to worsen. This can lead to increased pain, abscess formation, spreading infection to surrounding tissues, and potential damage to adjacent teeth and bone.",
+  "prognosis": "Healing typically takes about one to two weeks for the gum tissue. Bone takes longer to remodel. Most extractions heal without complications when post-operative instructions are followed. No outcome is guaranteed."
+}

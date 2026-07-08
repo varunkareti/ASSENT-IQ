@@ -32,6 +32,7 @@ WORKDIR /app/backend
 
 EXPOSE 8000
 
-# Use shell form so shell variable expansion works for $PORT
-# Railway injects PORT at runtime - shell form expands it
-CMD /bin/sh -c "python -m uvicorn main:app --host 0.0.0.0 --port ${PORT:-8000}"
+# Use exec form for reliable container startup
+# Railway sets PORT environment variable automatically
+ENV PORT=8000
+CMD ["python", "-m", "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]

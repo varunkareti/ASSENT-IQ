@@ -3,10 +3,6 @@ import { useNavigate } from 'react-router-dom';
 function LandingPage() {
   const navigate = useNavigate();
 
-  const handleAdminClick = () => {
-    navigate('/admin');
-  };
-
   const handleStart = () => {
     // No auth check needed - users can start directly
     navigate('/welcome');
@@ -16,7 +12,7 @@ function LandingPage() {
     <div style={{ minHeight: '100vh', background: '#fff' }}>
       {/* Header */}
       <header style={{
-        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
         padding: '18px 24px', borderBottom: '1px solid #E3E8F0', background: '#fff',
       }}>
         <div
@@ -26,21 +22,6 @@ function LandingPage() {
           <span style={{ color: '#0C1B4D' }}>Assent</span>
           <span style={{ color: '#22C7B0' }}>IQ</span>
         </div>
-        <button
-          onClick={handleAdminClick}
-          style={{
-            padding: '8px 20px',
-            background: '#0C1B4D',
-            color: '#fff',
-            border: 'none',
-            borderRadius: 8,
-            cursor: 'pointer',
-            fontSize: '0.85rem',
-            fontWeight: 600,
-          }}
-        >
-          Login
-        </button>
       </header>
 
       {/* Main Content */}

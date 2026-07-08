@@ -4,10 +4,9 @@ import os
 import logging
 from contextlib import asynccontextmanager
 
-from fastapi import FastAPI, Request, HTTPException
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse
 from database import init_db
 from routers import procedures, tts, chat, consent, sessions, auth, admin
 
@@ -38,9 +37,6 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
-# Track if frontend dist exists for SPA catch-all and static serving
-FRONTEND_BUILT = os.path.exists(FRONTEND_DIST)
-
 # CORS — allow Vite dev server + Railway production frontend
 allowed_origins = [
     "http://localhost:5173",
@@ -62,7 +58,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Register routers
+# Register API routers (must be BEFORE static files for /admin, /api etc.)
 app.include_router(admin.router)
 app.include_router(auth.router)
 app.include_router(procedures.router)
@@ -101,23 +97,9 @@ async def health_check():
     }
 
 
-# Catch-all SPA route: serve index.html for any non-API, non-asset path
-# This MUST be BEFORE StaticFiles mount to handle SPA routes like /admin, /welcome, etc.
-# Exclude /assets/*, /api/*, /storage/* paths to avoid returning index.html for JS/CSS/API requests
-@app.api_route("/{path:path}", methods=["GET", "POST", "PUT", "DELETE", "PATCH"])
-async def spa_catch_all(path: str, request: Request):
-    """Serve index.html for SPA client-side routing."""
-    # Skip if this looks like an asset, API, or storage path
-    if path.startswith("assets/") or path.startswith("api/") or path.startswith("storage/"):
-        raise HTTPException(status_code=404, detail="Not found")
-    if FRONTEND_BUILT:
-        index_file = os.path.join(FRONTEND_DIST, "index.html")
-        if os.path.exists(index_file):
-            return FileResponse(index_file)
-    raise HTTPException(status_code=404, detail="Frontend not built")
-
-
-# Serve frontend static assets (built by Vite) - MUST be AFTER catch-all
+# Serve frontend static assets (built by Vite)
+# html=True enables SPA fallback: serves index.html for any non-existent file
+# This handles /admin, /welcome, /explanation etc. for client-side routing
 if os.path.exists(FRONTEND_DIST):
     app.mount("/", StaticFiles(directory=FRONTEND_DIST, html=True), name="frontend")
 

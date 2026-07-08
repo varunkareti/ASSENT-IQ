@@ -4,10 +4,10 @@ import os
 import logging
 from contextlib import asynccontextmanager
 
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from fastapi.templating import Jinja2Templates
+from fastapi.responses import FileResponse
 from database import init_db
 from routers import procedures, tts, chat, consent, sessions, auth, admin
 
@@ -38,8 +38,8 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
-# Initialize templates for SPA catch-all
-templates = Jinja2Templates(directory=FRONTEND_DIST) if os.path.exists(FRONTEND_DIST) else None
+# Track if frontend dist exists for SPA catch-all and static serving
+FRONTEND_BUILT = os.path.exists(FRONTEND_DIST)
 
 # CORS — allow Vite dev server + Railway production frontend
 allowed_origins = [
@@ -106,9 +106,11 @@ async def health_check():
 @app.api_route("/{path:path}", methods=["GET", "POST", "PUT", "DELETE", "PATCH"])
 async def spa_catch_all(path: str, request: Request):
     """Serve index.html for SPA client-side routing."""
-    if templates:
-        return templates.TemplateResponse("index.html", {"request": request})
-    return {"error": "Frontend not built"}
+    if FRONTEND_BUILT:
+        index_file = os.path.join(FRONTEND_DIST, "index.html")
+        if os.path.exists(index_file):
+            return FileResponse(index_file)
+    raise HTTPException(status_code=404, detail="Frontend not built")
 
 
 # Serve frontend static assets (built by Vite) - MUST be AFTER catch-all

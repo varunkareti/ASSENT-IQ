@@ -101,19 +101,19 @@ async def health_check():
     }
 
 
-# Serve frontend static assets (built by Vite)
-if os.path.exists(FRONTEND_DIST):
-    app.mount("/", StaticFiles(directory=FRONTEND_DIST, html=True), name="frontend")
-
-
 # Catch-all SPA route: serve index.html for any non-API path not matched by API or storage routes
-# This enables client-side routing for SPA pages like /admin, /welcome, etc.
+# This MUST be BEFORE StaticFiles mount to handle SPA routes like /admin, /welcome, etc.
 @app.api_route("/{path:path}", methods=["GET", "POST", "PUT", "DELETE", "PATCH"])
 async def spa_catch_all(path: str, request: Request):
     """Serve index.html for SPA client-side routing."""
     if templates:
         return templates.TemplateResponse("index.html", {"request": request})
     return {"error": "Frontend not built"}
+
+
+# Serve frontend static assets (built by Vite) - MUST be AFTER catch-all
+if os.path.exists(FRONTEND_DIST):
+    app.mount("/", StaticFiles(directory=FRONTEND_DIST, html=True), name="frontend")
 
 
 if __name__ == "__main__":

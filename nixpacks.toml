@@ -1,11 +1,5 @@
-[phases.setup]
-aptDeps = ["python3.11-venv"]
-
-[phases.install]
-cmd = "python3 -m venv .venv && . .venv/bin/activate && pip install -r backend/requirements.txt && cd frontend && npm install"
+[start]
+cmd = "mkdir -p backend/public && cd backend && python -m uvicorn main:app --host 0.0.0.0 --port $PORT"
 
 [build]
-cmd = "cd frontend && npm run build && mkdir -p ../backend/public && cp -r dist/* ../backend/public/"
-
-[start]
-cmd = ". .venv/bin/activate && mkdir -p backend/public && cd backend && python -m uvicorn main:app --host 0.0.0.0 --port $PORT"
+cmd = "cd frontend && npm install && npm run build && mkdir -p ../backend/public && cp -r dist/* ../backend/public/"

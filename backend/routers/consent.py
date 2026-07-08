@@ -36,7 +36,10 @@ def _get_user_id_from_token(token: str | None) -> str | None:
     """Look up user_id from session token (shared with auth)."""
     if not token:
         return None
-    from routers.auth import active_sessions
+    try:
+        from routers.auth import active_sessions
+    except ImportError:
+        from auth import active_sessions
     return active_sessions.get(token)
 
 
@@ -49,7 +52,10 @@ async def create_session(req: CreateSessionRequest, request: Request):
     token = request.headers.get("x-session-token")
     user_id = None
     if token:
-        from routers.auth import active_sessions
+        try:
+            from routers.auth import active_sessions
+        except ImportError:
+            from auth import active_sessions
         user_id = active_sessions.get(token)
 
     conn = get_connection()

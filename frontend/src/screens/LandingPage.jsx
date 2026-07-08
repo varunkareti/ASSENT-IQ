@@ -26,21 +26,7 @@ function LandingPage() {
           <span style={{ color: '#0C1B4D' }}>Assent</span>
           <span style={{ color: '#22C7B0' }}>IQ</span>
         </div>
-        <button
-          onClick={handleAdminClick}
-          style={{
-            padding: '8px 20px',
-            background: '#0C1B4D',
-            color: '#fff',
-            border: 'none',
-            borderRadius: 8,
-            cursor: 'pointer',
-            fontSize: '0.85rem',
-            fontWeight: 600,
-          }}
-        >
-          Admin
-        </button>
+  
       </header>
 
       {/* Main Content */}

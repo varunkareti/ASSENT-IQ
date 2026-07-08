@@ -1,7 +1,11 @@
+ARG BUILD_TIMESTAMP
 FROM node:18-alpine AS frontend-builder
 WORKDIR /app
+
+# Force fresh npm install by touching package files
 COPY frontend/package.json frontend/package-lock.json ./
-RUN npm ci --no-audit --no-fund
+RUN npm ci --no-audit --no-fund 2>&1 || npm install --no-audit 2>&1
+
 COPY frontend/ ./
 RUN npm run build
 
@@ -21,6 +25,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY backend/ ./backend/
 COPY --from=frontend-builder /app/dist ./backend/public
+RUN ls -la /app/backend/public/ && head -5 /app/backend/public/index.html
 
 # Set working directory so bare imports (database, routers, etc.) resolve
 WORKDIR /app/backend

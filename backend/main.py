@@ -4,9 +4,10 @@ import os
 import logging
 from contextlib import asynccontextmanager
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
 from database import init_db
 from routers import procedures, tts, chat, consent, sessions, auth, admin
 
@@ -36,6 +37,9 @@ app = FastAPI(
     version="1.0.0",
     lifespan=lifespan,
 )
+
+# Initialize templates for SPA catch-all
+templates = Jinja2Templates(directory=FRONTEND_DIST) if os.path.exists(FRONTEND_DIST) else None
 
 # CORS — allow Vite dev server + Railway production frontend
 allowed_origins = [
@@ -102,7 +106,16 @@ if os.path.exists(FRONTEND_DIST):
     app.mount("/", StaticFiles(directory=FRONTEND_DIST, html=True), name="frontend")
 
 
+# Catch-all SPA route: serve index.html for any non-API path not matched by API or storage routes
+# This enables client-side routing for SPA pages like /admin, /welcome, etc.
+@app.api_route("/{path:path}", methods=["GET", "POST", "PUT", "DELETE", "PATCH"])
+async def spa_catch_all(path: str, request: Request):
+    """Serve index.html for SPA client-side routing."""
+    if templates:
+        return templates.TemplateResponse("index.html", {"request": request})
+    return {"error": "Frontend not built"}
+
+
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)
-

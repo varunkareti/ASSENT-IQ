@@ -1,0 +1,25 @@
+services:
+  # Backend API — FastAPI Python service
+  - type: web
+    name: assentiq-backend
+    env: python
+    region: oregon
+    plan: free
+    buildCommand: pip install -r backend/requirements.txt
+    startCommand: cd backend && uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: ADMIN_USERNAME
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_EXPIRATION_HOURS
+        value: "24"
+      - key: PYTHON_VERSION
+        value: "3.11.0"
+
+# SQLite database file is stored on the same instance (persists across deploys on paid plans)
+# On free plan, data resets every 90 days — use PostgreSQL for persistence

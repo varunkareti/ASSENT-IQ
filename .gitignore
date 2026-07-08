@@ -26,6 +26,17 @@ Thumbs.db
 
 # Build
 frontend/dist/
+dist/
+
+# Python cache
+__pycache__/
+**/__pycache__/
+*.pyc
+*.pyo
+
+# Virtual environment
+venv/
+**/venv/
 
 # Logs
 *.log

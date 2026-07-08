@@ -101,11 +101,15 @@ async def health_check():
     }
 
 
-# Catch-all SPA route: serve index.html for any non-API path not matched by API or storage routes
+# Catch-all SPA route: serve index.html for any non-API, non-asset path
 # This MUST be BEFORE StaticFiles mount to handle SPA routes like /admin, /welcome, etc.
+# Exclude /assets/*, /api/*, /storage/* paths to avoid returning index.html for JS/CSS/API requests
 @app.api_route("/{path:path}", methods=["GET", "POST", "PUT", "DELETE", "PATCH"])
 async def spa_catch_all(path: str, request: Request):
     """Serve index.html for SPA client-side routing."""
+    # Skip if this looks like an asset, API, or storage path
+    if path.startswith("assets/") or path.startswith("api/") or path.startswith("storage/"):
+        raise HTTPException(status_code=404, detail="Not found")
     if FRONTEND_BUILT:
         index_file = os.path.join(FRONTEND_DIST, "index.html")
         if os.path.exists(index_file):

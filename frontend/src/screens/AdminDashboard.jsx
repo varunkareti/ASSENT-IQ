@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getProcedureDisplayName } from '../utils/procedures';
 
-const ADMIN_API = import.meta.env.VITE_API_BASE || 'http://localhost:8000';
+const ADMIN_API = import.meta.env.VITE_API_BASE || '';
 
 export default function AdminDashboard() {
   const navigate = useNavigate();

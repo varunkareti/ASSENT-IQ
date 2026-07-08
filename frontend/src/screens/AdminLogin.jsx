@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 
-const ADMIN_API = import.meta.env.VITE_API_BASE || 'http://localhost:8000';
+const ADMIN_API = import.meta.env.VITE_API_BASE || '';
 
 export default function AdminLogin() {
   const navigate = useNavigate();

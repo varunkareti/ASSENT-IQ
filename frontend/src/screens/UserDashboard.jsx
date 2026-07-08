@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { useSession } from '../state/sessionContext';
 import { getProcedureDisplayName } from '../utils/procedures';
 
-const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:8000';
+const API_BASE = import.meta.env.VITE_API_BASE || '';
 
 export default function UserDashboard() {
   const { state } = useSession();

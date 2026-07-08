@@ -86,11 +86,7 @@ app.mount("/storage/audio", StaticFiles(directory=AUDIO_DIR), name="audio")
 app.mount("/storage/signatures", StaticFiles(directory=SIGNATURES_DIR), name="signatures")
 app.mount("/storage/pdfs", StaticFiles(directory=PDFS_DIR), name="pdfs")
 
-# Serve frontend static assets (built by Vite)
-if os.path.exists(FRONTEND_DIST):
-    app.mount("/", StaticFiles(directory=FRONTEND_DIST, html=True), name="frontend")
-
-
+# Health check MUST be before static files mount (otherwise /health returns index.html)
 @app.get("/health")
 async def health_check():
     """Health check endpoint for judges/demo."""
@@ -99,6 +95,11 @@ async def health_check():
         "service": "AssentIQ",
         "version": "1.0.0",
     }
+
+
+# Serve frontend static assets (built by Vite)
+if os.path.exists(FRONTEND_DIST):
+    app.mount("/", StaticFiles(directory=FRONTEND_DIST, html=True), name="frontend")
 
 
 if __name__ == "__main__":

@@ -3,13 +3,17 @@
 import os
 import logging
 from contextlib import asynccontextmanager
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse
-
 from database import init_db
 from routers import procedures, tts, chat, consent, sessions, auth, admin
+
+# Allow frontend from any origin in production (Railway subdomain)
+FRONTEND_URL = os.getenv("FRONTEND_URL", "")
+# Build frontend into backend/public so we can serve it statically
+FRONTEND_DIST = os.path.join(os.path.dirname(__file__), "public")
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -33,10 +37,22 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
-# CORS — allow Vite dev server
+# CORS — allow Vite dev server + Railway production frontend
+allowed_origins = [
+    "http://localhost:5173",
+    "http://localhost:3000", 
+    "http://127.0.0.1:5173",
+]
+# Add Railway frontend URL if set
+if FRONTEND_URL:
+    allowed_origins.append(FRONTEND_URL)
+# In production, also allow any .railway.app subdomain
+if FRONTEND_URL.endswith('.railway.app') or os.getenv("RAILWAY_ENVIRONMENT"):
+    allowed_origins.append("https://*.railway.app")
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "http://localhost:3000", "http://127.0.0.1:5173"],
+    allow_origins=allowed_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -69,6 +85,10 @@ os.makedirs(PDFS_DIR, exist_ok=True)
 app.mount("/storage/audio", StaticFiles(directory=AUDIO_DIR), name="audio")
 app.mount("/storage/signatures", StaticFiles(directory=SIGNATURES_DIR), name="signatures")
 app.mount("/storage/pdfs", StaticFiles(directory=PDFS_DIR), name="pdfs")
+
+# Serve frontend static assets (built by Vite)
+if os.path.exists(FRONTEND_DIST):
+    app.mount("/", StaticFiles(directory=FRONTEND_DIST, html=True), name="frontend")
 
 
 @app.get("/health")

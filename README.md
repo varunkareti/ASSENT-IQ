@@ -88,6 +88,3 @@ This project is configured for one-click deployment on Railway using a Dockerfil
 
 The Dockerfile builds the React frontend and serves it statically from the FastAPI backend, handling both frontend and backend in a single container.
 
-## License
-
-© 2026 AssentIQ. All rights reserved.

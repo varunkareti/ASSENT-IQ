@@ -25,7 +25,9 @@ COPY --from=frontend-builder /app/dist ./backend/public
 # Set working directory so bare imports (database, routers, etc.) resolve
 WORKDIR /app/backend
 
-ENV PORT=8000
+# Do NOT hardcode PORT - let Railway inject it at runtime
+# Expose the default port for local dev
 EXPOSE 8000
 
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+# Use shell form so $PORT from Railway is expanded
+CMD python -m uvicorn main:app --host 0.0.0.0 --port ${PORT:-8000}
